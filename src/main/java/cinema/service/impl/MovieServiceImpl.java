@@ -1,15 +1,15 @@
 package cinema.service.impl;
 
 import cinema.dao.MovieDao;
-import cinema.lib.Inject;
-import cinema.lib.Service;
 import cinema.model.Movie;
 import cinema.service.MovieService;
 
-@Service
 public class MovieServiceImpl implements MovieService {
-    @Inject
-    private MovieDao movieDao;
+    private final MovieDao movieDao;
+
+    public MovieServiceImpl(MovieDao movieDao) {
+        this.movieDao = movieDao;
+    }
 
     @Override
     public Movie add(Movie movie) {
@@ -18,6 +18,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie get(Long id) {
-        return movieDao.get(id).get();
+        return movieDao.get(id).orElseThrow(()
+                -> new RuntimeException("Can't get movie by id: " + id));
     }
 }
