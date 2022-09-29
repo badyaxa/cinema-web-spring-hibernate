@@ -1,37 +1,27 @@
-# Hibernate relations
+# Hibernate cascades
 
-### Intro
+Oops... Looks like we started this task with TDD approach, but haven't finished. 
+Your main task is to add required annotations for entities and implement all DAO methods.
 
-In this HW you will have the following structure in DAO implementations:
-```java
-public class ActorDaoImpl extends AbstractDao implements ActorDao {
-    public ActorDaoImpl(SessionFactory sessionFactory) {
-        super(sessionFactory);
-    }
-}
-```
-Such structure is a good example of Dependency Injection implementation. Please, do not modify this.
-And thus in methods `add(Entity entity)` and `get(Long id)` of DAO layer you need just to refer to the SessionFactory
-instance of the parent AbstractDao class:
+Also, we are expecting you will have some practice with cascades. Please complete the following requirements:
 
-```java
-public Entity add(Entity entity) {
-    Session session = null;
-    Transaction transaction = null;
-    try {
-        session = factory.openSession();
-        transaction = ...
-```
+1. There are two classes: Comment and Smile. One comment can have multiple smiles. 
+Implement the `remove(Comment comment)` method. Smiles used in this comment should NOT be removed.
+Add correct cascades. When you are creating a new comment you should use existed smiles 
+(DON'T create a smile if it does not exist in the DB).
 
-### Requirements
+1. There are two classes: User and Comment. One user can have multiple comments. 
+Implement the `remove(User user)` method. Remove user from the DB.
+Comments left by this user should NOT be removed.
+Add correct cascades. When you are creating a new user you should use also create comments 
+(save each new comment in the DB).
 
-Your task is to implement the following steps:
-- add required hibernate dependencies
-- complete implementation of all classes in the `mate/academy/hibernate/relations/model` package
-- complete implementation of all classes in the `mate/academy/hibernate/relations/dao/impl` package
-- create your custom unchecked DataProcessingException and throw it in the catch block on dao layer
-- complete implementation of all classes in the `mate/academy/hibernate/relations/service/impl/` package
-- create `hibernate.cfg.xml` file and implement `mate/academy/hibernate/relations/util/HibernateUtil` class (this is required for next step)
-- make `mate/academy/Main.java` work (you should be able to run `main()` method without any errors)
+1. There are two classes: Message and MessageDetails. One message can have only one message details.
+Implement the `remove(Message message)` method. MessageDetails also should be created and removed along with parent 
+Message entity.
 
-#### [Try to avoid these common mistakes, while solving task](https://mate-academy.github.io/jv-program-common-mistakes/hibernate/relations/relations_checklist)
+1. Implement all DAO interfaces (except GenericDao).
+
+You can see how to implement the `getAll()` methods [here](https://youtu.be/AhSEx44RhOM) or [here](https://www.tutorialspoint.com/hibernate/hibernate_query_language.htm)
+
+#### [Try to avoid these common mistakes while solving task](https://mate-academy.github.io/jv-program-common-mistakes/hibernate/cascades/cascades_checklist)
