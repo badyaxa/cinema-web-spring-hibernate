@@ -12,5 +12,7 @@
         <property name="connection.password">root</property>
         <property name="show_sql">true</property>
         <property name="hbm2ddl.auto">update</property>
+        <mapping class="cinema.model.Movie"/>
+        <mapping class="cinema.model.CinemaHall"/>
     </session-factory>
 </hibernate-configuration>
