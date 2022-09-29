@@ -1,27 +1,38 @@
-# Hibernate cascades
+# Hibernate - create CinemaHall and MovieSession
 
-Oops... Looks like we started this task with TDD approach, but haven't finished. 
-Your main task is to add required annotations for entities and implement all DAO methods.
+Let's continue working on our Cinema project.
 
-Also, we are expecting you will have some practice with cascades. Please complete the following requirements:
+Your task is to implement the following steps:
+- create `src/main/resources/hibernate.cfg.xml`
+- create `CinemaHall` class
+- create `MovieSession` class - be careful adding relations with `Movie` and `CinemaHall`
+- add implementations of `getAll()` method to `MovieDaoImpl` and `MovieServiceImpl`
+- create `CinemaHallDaoImpl` and `CinemaHallServiceImpl`.
+The service layer should have the following methods:
+```java
+    CinemaHall add(CinemaHall cinemaHall);
 
-1. There are two classes: Comment and Smile. One comment can have multiple smiles. 
-Implement the `remove(Comment comment)` method. Smiles used in this comment should NOT be removed.
-Add correct cascades. When you are creating a new comment you should use existed smiles 
-(DON'T create a smile if it does not exist in the DB).
+    CinemaHall get(Long id);
 
-1. There are two classes: User and Comment. One user can have multiple comments. 
-Implement the `remove(User user)` method. Remove user from the DB.
-Comments left by this user should NOT be removed.
-Add correct cascades. When you are creating a new user you should use also create comments 
-(save each new comment in the DB).
+    List<CinemaHall> getAll();
+```
+- create `MovieSessionDaoImpl` and `MovieSessionServiceImpl`.
+The service layer should have the following methods:
+```java
+    MovieSession add(MovieSession movieSession);
 
-1. There are two classes: Message and MessageDetails. One message can have only one message details.
-Implement the `remove(Message message)` method. MessageDetails also should be created and removed along with parent 
-Message entity.
+    MovieSession get(Long id);
 
-1. Implement all DAO interfaces (except GenericDao).
+    List<MovieSession> findAvailableSessions(Long movieId, LocalDate date);
+```
+Keep in mind that method `findAvailableSessions()` expects a `LocalDate` that represents the day 
+chosen by a customer to visit our cinema, so your task here is to return all MovieSessions 
+that will be running between 00:00 and 23:59:59 on that particular day.
+- in the `mate/academy/Main.main()` method create instances of new services 
+using injector and test all their methods
+- use annotations and the annotation injector located in the `lib` folder
 
-You can see how to implement the `getAll()` methods [here](https://youtu.be/AhSEx44RhOM) or [here](https://www.tutorialspoint.com/hibernate/hibernate_query_language.htm)
+#### [Try to avoid these common mistakes, while solving task](https://mate-academy.github.io/jv-program-common-mistakes/hibernate/add-movie-session/add_movie_session_checklist)
 
-#### [Try to avoid these common mistakes while solving task](https://mate-academy.github.io/jv-program-common-mistakes/hibernate/cascades/cascades_checklist)
+### Model structure 
+![pic](Hibernate_Cinema_Uml.png)
