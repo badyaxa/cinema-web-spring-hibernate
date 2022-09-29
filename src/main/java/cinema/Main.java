@@ -1,9 +1,12 @@
 package cinema;
 
+import cinema.lib.Injector;
 import cinema.model.Movie;
 import cinema.service.MovieService;
 
 public class Main {
+    private static final Injector injector = Injector.getInstance("mate.academy");
+
     public static void main(String[] args) {
         MovieService movieService = null;
 
