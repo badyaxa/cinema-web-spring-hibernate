@@ -1,7 +1,7 @@
 package cinema.dao;
 
-import java.util.Optional;
 import cinema.model.Country;
+import java.util.Optional;
 
 public interface CountryDao {
     Country add(Country country);

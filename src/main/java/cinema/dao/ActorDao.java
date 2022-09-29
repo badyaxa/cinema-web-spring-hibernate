@@ -1,7 +1,7 @@
 package cinema.dao;
 
-import java.util.Optional;
 import cinema.model.Actor;
+import java.util.Optional;
 
 public interface ActorDao {
     Actor add(Actor actor);

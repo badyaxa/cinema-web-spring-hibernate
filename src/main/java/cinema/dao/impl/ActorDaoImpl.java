@@ -1,9 +1,9 @@
 package cinema.dao.impl;
 
-import java.util.Optional;
 import cinema.dao.ActorDao;
 import cinema.exception.DataProcessingException;
 import cinema.model.Actor;
+import java.util.Optional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

@@ -1,22 +1,39 @@
 package cinema;
 
-import cinema.lib.Injector;
+import cinema.dao.impl.ActorDaoImpl;
+import cinema.dao.impl.CountryDaoImpl;
+import cinema.dao.impl.MovieDaoImpl;
+import cinema.model.Actor;
+import cinema.model.Country;
 import cinema.model.Movie;
+import cinema.service.ActorService;
+import cinema.service.CountryService;
 import cinema.service.MovieService;
+import cinema.service.impl.ActorServiceImpl;
+import cinema.service.impl.CountryServiceImpl;
+import cinema.service.impl.MovieServiceImpl;
+import cinema.util.HibernateUtil;
+import java.util.List;
+import org.hibernate.SessionFactory;
 
 public class Main {
-    private static final Injector injector = Injector.getInstance("mate.academy");
-
     public static void main(String[] args) {
-        MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
-        Movie movie = new Movie();
-        movie.setTitle("Spy");
-        movie.setDescription("Susan Cooper is a 40-year-old, single, "
-                + "desk-bound CIA employee who assists her partner remotely, "
-                + "field agent Bradley Fine, on a mission. "
-                + "Fine accidentally kills arms dealer Tihomir Boyanov, "
-                + "failing to learn the location of a suitcase nuke from him.");
-        Movie spy = movieService.add(movie);
-        System.out.println("movieService.get(spy.getId()) = " + movieService.get(spy.getId()));
+        // use this session factory when you will initialize service instances
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+
+        Country usa = new Country("USA");
+        CountryService countryService = new CountryServiceImpl(new CountryDaoImpl(sessionFactory));
+        countryService.add(usa);
+
+        Actor vinDiesel = new Actor("Vin Diesel");
+        vinDiesel.setCountry(usa);
+        ActorService actorService = new ActorServiceImpl(new ActorDaoImpl(sessionFactory));
+        actorService.add(vinDiesel);
+
+        Movie fastAndFurious = new Movie("Fast and Furious");
+        fastAndFurious.setActors(List.of(vinDiesel));
+        MovieService movieService = new MovieServiceImpl(new MovieDaoImpl(sessionFactory));
+        movieService.add(fastAndFurious);
+        System.out.println(movieService.get(fastAndFurious.getId()));
     }
 }
