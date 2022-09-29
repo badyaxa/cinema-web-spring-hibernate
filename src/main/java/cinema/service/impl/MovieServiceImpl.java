@@ -13,11 +13,11 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie add(Movie movie) {
-        return null;
+        return movieDao.add(movie);
     }
 
     @Override
     public Movie get(Long id) {
-        return null;
+        return movieDao.get(id).get();
     }
 }
