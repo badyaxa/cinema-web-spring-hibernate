@@ -1,35 +1,37 @@
-# Hibernate 
+# Hibernate relations
 
-We are starting working with Hibernate on the new project. We will implement it step by step. 
-Completed structure of project is described below:
-![pic](Hibernate_Cinema_Uml.png)
+### Intro
+
+In this HW you will have the following structure in DAO implementations:
+```java
+public class ActorDaoImpl extends AbstractDao implements ActorDao {
+    public ActorDaoImpl(SessionFactory sessionFactory) {
+        super(sessionFactory);
+    }
+}
+```
+Such structure is a good example of Dependency Injection implementation. Please, do not modify this.
+And thus in methods `add(Entity entity)` and `get(Long id)` of DAO layer you need just to refer to the SessionFactory
+instance of the parent AbstractDao class:
+
+```java
+public Entity add(Entity entity) {
+    Session session = null;
+    Transaction transaction = null;
+    try {
+        session = factory.openSession();
+        transaction = ...
+```
+
+### Requirements
 
 Your task is to implement the following steps:
 - add required hibernate dependencies
-- create `hibernate.cfg.xml` file
-- create `HibernateUtil` class
-- create `Movie` model class
-- create `MovieDao` interface and `MovieDaoImpl` class
-    ```java
-      public interface MovieDao {
-          Movie add(Movie movie);
-      
-          Optional<Movie> get(Long id);
-      }
-    ```
-- create `MovieService` interface and `MovieServiceImpl` class
-    ```java
-      public interface MovieService {
-          Movie add(Movie movie);
-      
-          Movie get(Long id);
-      }
-    ```
+- complete implementation of all classes in the `mate/academy/hibernate/relations/model` package
+- complete implementation of all classes in the `mate/academy/hibernate/relations/dao/impl` package
 - create your custom unchecked DataProcessingException and throw it in the catch block on dao layer
-- in the `mate/academy/Main.main()` method create instance of MovieService using injector and test all methods from MovieService
-- use annotations and the annotation injector located in the `lib` folder
-- run tests with command `mvn -DskipTests=false clean package`.
+- complete implementation of all classes in the `mate/academy/hibernate/relations/service/impl/` package
+- create `hibernate.cfg.xml` file and implement `mate/academy/hibernate/relations/util/HibernateUtil` class (this is required for next step)
+- make `mate/academy/Main.java` work (you should be able to run `main()` method without any errors)
 
-__!!! Important:__ you should have only `Movie` model with dao and service layer. Don't create other models and don't push them to PR.
-
-#### [Try to avoid these common mistakes, while solving task](https://mate-academy.github.io/jv-program-common-mistakes/hibernate/configuration/configuration_checklist)
+#### [Try to avoid these common mistakes, while solving task](https://mate-academy.github.io/jv-program-common-mistakes/hibernate/relations/relations_checklist)
