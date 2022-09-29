@@ -1,11 +1,11 @@
 package cinema.service.impl;
 
 import cinema.dao.MovieDao;
-import java.util.List;
 import cinema.lib.Inject;
 import cinema.lib.Service;
 import cinema.model.Movie;
 import cinema.service.MovieService;
+import java.util.List;
 
 @Service
 public class MovieServiceImpl implements MovieService {
@@ -24,6 +24,6 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public List<Movie> getAll() {
-        return null;
+        return movieDao.getAll();
     }
 }

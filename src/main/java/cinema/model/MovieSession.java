@@ -1,14 +1,14 @@
 package cinema.model;
 
 import java.time.LocalDateTime;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import mate.academy.model.CinemaHall;
-import mate.academy.model.Movie;
 
 @Entity
 @Table(name = "movie_sessions")
@@ -17,9 +17,11 @@ public class MovieSession {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    private mate.academy.model.Movie movie;
+    private Movie movie;
     @ManyToOne
-    private mate.academy.model.CinemaHall cinemaHall;
+    @JoinColumn(name = "cinema_hall")
+    private CinemaHall cinemaHall;
+    @Column(name = "show_time")
     private LocalDateTime showTime;
 
     public Long getId() {
@@ -30,7 +32,7 @@ public class MovieSession {
         this.id = id;
     }
 
-    public mate.academy.model.Movie getMovie() {
+    public Movie getMovie() {
         return movie;
     }
 
@@ -38,7 +40,7 @@ public class MovieSession {
         this.movie = movie;
     }
 
-    public mate.academy.model.CinemaHall getCinemaHall() {
+    public CinemaHall getCinemaHall() {
         return cinemaHall;
     }
 
