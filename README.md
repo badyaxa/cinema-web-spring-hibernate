@@ -1,38 +1,36 @@
-# Hibernate - create CinemaHall and MovieSession
+# Cinema-Service
 
-Let's continue working on our Cinema project.
+This is simple simulator of cinema service for reservation tickets, that supports registration, authentication and CRUD
+operations.
+___
 
-Your task is to implement the following steps:
-- create `src/main/resources/hibernate.cfg.xml`
-- create `CinemaHall` class
-- create `MovieSession` class - be careful adding relations with `Movie` and `CinemaHall`
-- add implementations of `getAll()` method to `MovieDaoImpl` and `MovieServiceImpl`
-- create `CinemaHallDaoImpl` and `CinemaHallServiceImpl`.
-The service layer should have the following methods:
-```java
-    CinemaHall add(CinemaHall cinemaHall);
+## Features:
 
-    CinemaHall get(Long id);
+* register or login as user
+* create and find movies
+* create and find available movie sessions
+* creating shopping cart
+* add tickets to shopping cart
+* complete an order
 
-    List<CinemaHall> getAll();
-```
-- create `MovieSessionDaoImpl` and `MovieSessionServiceImpl`.
-The service layer should have the following methods:
-```java
-    MovieSession add(MovieSession movieSession);
+---
 
-    MovieSession get(Long id);
+## Project architecture:
 
-    List<MovieSession> findAvailableSessions(Long movieId, LocalDate date);
-```
-Keep in mind that method `findAvailableSessions()` expects a `LocalDate` that represents the day 
-chosen by a customer to visit our cinema, so your task here is to return all MovieSessions 
-that will be running between 00:00 and 23:59:59 on that particular day.
-- in the `mate/academy/Main.main()` method create instances of new services 
-using injector and test all their methods
-- use annotations and the annotation injector located in the `lib` folder
+The Cinema-Service is based on 3-layer architecture:
 
-#### [Try to avoid these common mistakes, while solving task](https://mate-academy.github.io/jv-program-common-mistakes/hibernate/add-movie-session/add_movie_session_checklist)
+1. Controllers, which handle requests, call services and send responses
+2. Services - there are all business logic
+3. DAO, which handle CRUD operations to database
 
-### Model structure 
+### Model structure
+
 ![pic](Hibernate_Cinema_Uml.png)
+---
+
+## Technologies used in project:
+
+* Java 11
+* MySql 8.0.29
+* Hibernate 5.6.8
+* Maven
