@@ -17,9 +17,10 @@ public class MovieSession {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
+    @JoinColumn(name = "movie_id")
     private Movie movie;
     @ManyToOne
-    @JoinColumn(name = "cinema_hall")
+    @JoinColumn(name = "cinema_hall_id")
     private CinemaHall cinemaHall;
     @Column(name = "show_time")
     private LocalDateTime showTime;
@@ -62,7 +63,6 @@ public class MovieSession {
                 + "id=" + id
                 + ", movie=" + movie
                 + ", cinemaHall=" + cinemaHall
-                + ", showTime=" + showTime
-                + '}';
+                + ", showTime=" + showTime + '}';
     }
 }
