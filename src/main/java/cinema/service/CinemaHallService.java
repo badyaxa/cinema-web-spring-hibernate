@@ -1,7 +1,7 @@
 package cinema.service;
 
-import java.util.List;
 import cinema.model.CinemaHall;
+import java.util.List;
 
 public interface CinemaHallService {
     CinemaHall add(CinemaHall cinemaHall);
